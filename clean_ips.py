@@ -67,7 +67,7 @@ print("🧼 Executing topological block-merge reduction...")
 optimized_networks = list(ipaddress.collapse_addresses(raw_networks))
 
 # Save the final flat list
-with open("pa-master-ip-blocklist.txt", "w") as f:
+with open("./pa-master-ip-blocklist.txtt", "w") as f:
     for net in optimized_networks:
         f.write(f"{net}\n")
 
