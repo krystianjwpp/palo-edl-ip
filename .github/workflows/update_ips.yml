@@ -27,10 +27,8 @@ jobs:
         run: python clean_ips.py
 
       - name: Commit and Push File Directly to Main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # FIXED: Grants write permissions to the action runner
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action Automation"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           git add pa-master-ip-blocklist.txt
-          git diff --quiet && git diff --cached --quiet || (git commit -m "Automated update of IP master blocklist" && git push origin main)
+          git diff --quiet && git diff --cached --quiet || (git commit -m "Automated update of IP master blocklist" && git push origin HEAD:main)
