@@ -2,16 +2,14 @@ name: Update Firewall IP Threat Feeds
 
 on:
   schedule:
-    - cron: '0 * * * *'  # Runs automatically at the top of every hour
-  workflow_dispatch:     # Allows you to run it manually with a click
+    - cron: '0 * * * *'  # Runs automatically every hour
+  workflow_dispatch:     # Allows manual trigger
 
 permissions:
-  contents: write
-  pages: write
-  id-token: write
+  contents: write        # Required to push the file back into main branch
 
 jobs:
-  build-and-deploy:
+  build-and-commit:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code Repository
@@ -26,13 +24,11 @@ jobs:
         run: pip install requests
 
       - name: Run IP Clean Script
-        run: |
-          mkdir -p public
-          python clean_ips.py
-          mv pa-master-ip-blocklist.txt public/
+        run: python clean_ips.py
 
-      - name: Deploy Flat Files to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: public
-          branch: gh-pages
+      - name: Commit and Push File Directly to Main
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action Automation"
+          git add pa-master-ip-blocklist.txt
+          git diff --quiet && git diff --cached --quiet || (git commit -m "Automated update of IP master blocklist" && git push origin main)
