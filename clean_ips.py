@@ -6,15 +6,21 @@ headers = {
 }
 
 # The exact 8 source URLs you provided
+# Mapped active intelligence streams with your 4 new OpenDBL targets included
 edl_feeds = {
-    "DShield Block": "https://www.dshield.org/block.txt",
-    "GreenSnow": "https://blocklist.greensnow.co/greensnow.txt",
-    "Spamhaus DROP": "https://www.spamhaus.org/drop/drop.txt",
-    "FireHOL Level 1": "https://raw.githubusercontent.com/ktsaou/blocklist-ipsets/master/firehol_level1.netset",
-    "Emerging Threats Known": "https://opendbl.net/lists/etknown.list",
+    "DShield Block": "https://dshield.org",
+    "GreenSnow": "https://greensnow.co",
+    "Spamhaus DROP": "https://spamhaus.org",
+    "FireHOL Level 1": "https://githubusercontent.com",
+    "Emerging Threats Known": "https://opendbl.net",
     "IPSum Master": "https://opendbl.net/lists/ipsum.list",
-    "OpenDBL High-Confidence": "https://opendbl.net/lists/high-confidence.list",
-    "FireHOL Level 3": "https://raw.githubusercontent.com/firehol/blocklist-ipsets/refs/heads/master/firehol_level3.netset"
+    "OpenDBL High-Confidence": "https://opendbl.net",
+    "FireHOL Level 3": "https://githubusercontent.com",
+    # --- YOUR NEW TARGET SOURCES ADDED BELOW ---
+    "ThreatFox C2 & Payload": "https://opendbl.net/lists/threatfox.list",
+    "Blocklist.de All": "https://opendbl.net/lists/blocklistde-all.list",
+    "DShield Expanded": "https://opendbl.net/lists/dshield-expanded.list",
+    "OpenDBL Broad-Coverage": "https://opendbl.net/lists/broad-coverage.list"
 }
 
 raw_networks = []
