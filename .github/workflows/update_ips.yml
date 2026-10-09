@@ -1,0 +1,38 @@
+name: Update Firewall IP Threat Feeds
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Runs automatically at the top of every hour
+  workflow_dispatch:     # Allows you to run it manually with a click
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python Environment
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Request Modules
+        run: pip install requests
+
+      - name: Run IP Clean Script
+        run: |
+          mkdir -p public
+          python clean_ips.py
+          mv pa-master-ip-blocklist.txt public/
+
+      - name: Deploy Flat Files to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: public
+          branch: gh-pages
